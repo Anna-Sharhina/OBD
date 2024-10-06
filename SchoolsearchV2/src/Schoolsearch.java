@@ -65,7 +65,7 @@ class StudentSearch {
 
     public static void searchByLastName(String lastName) {
         search("list.txt", lastName, 0, result -> {
-            String teacherName = TeacherSearch.getTeacherByClassroom(result[3]);
+            String teacherName = TeacherSearch.getTeacherByClassroom(result[3].trim());
             if (teacherName != null) {
                 System.out.println("Found student: " + result[0] + " " + result[1] + " in class: " + result[3] + ", Teacher: " + teacherName);
             } else {
@@ -108,7 +108,7 @@ class StudentSearch {
 class TeacherSearch {
 
     public static void searchByLastName(String lastName) {
-        search("teacher.txt", lastName, 0, result -> {
+        search("teachers.txt", lastName, 0, result -> {
             System.out.println("Found teacher: " + result[0] + " " + result[1] + " in classroom: " + result[2]);
         });
     }
@@ -138,7 +138,7 @@ class TeacherSearch {
     }
 
     public static String getTeacherByClassroom(String classroom) {
-        try (BufferedReader br = new BufferedReader(new FileReader("teacher.txt"))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("teachers.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",");
